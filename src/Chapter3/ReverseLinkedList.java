@@ -16,29 +16,31 @@ public class ReverseLinkedList
 		second.setNext(third);
 		third.setNext(fourth);
 
-		Node newHead = reverse(head, head.getNext());
-
-		while (newHead.getNext() != null) {
-			System.out.println(newHead.getData());
+		doReverse(head);
+		Node newHead = fourth;
+		while (newHead != null) {
+			System.out.println(newHead);
 			newHead = newHead.getNext();
 		}
 	}
 
-	// 1 -> 2 -> 3 -> 4
-	// 4 -> 3 -> 2 -> 1
-	// Recursive until 
-	public static Node reverse(Node node, Node nextNode)
+	public Node reverse(Node node, Node nextNode)
 	{
 		if (nextNode == null) {
 			return node;
 		}
 		else {
 			Node newNode = reverse(nextNode, nextNode.getNext());
-			nextNode.setNext(node);
-			return nextNode;
+			newNode.setNext(node);
+			return node;
 		}
 	}
 
+	public void doReverse(Node headNode)
+	{
+		reverse(headNode, headNode.getNext());
+		headNode.setNext(null);
+	}
 
 	private class Node
 	{
@@ -63,6 +65,12 @@ public class ReverseLinkedList
 		int getData()
 		{
 			return mData;
+		}
+
+		@Override
+		public String toString()
+		{
+			return "Data: " + mData;
 		}
 	}
 }
