@@ -2,14 +2,14 @@ public class Sorting
 {
 	public static void main(String[] args)
 	{
-		int[] arrayToSort = {1, 7, 2, 19, 3, 44, 67};
+		int[] arrayToSort = {9, 7, 2, 19, 3, 44, 67};
 
 		for (int i = 0;i < arrayToSort.length; i++) {
 			System.out.print(arrayToSort[i] + " ");
 		}
 		System.out.println();
 
-		quickSort(arrayToSort);
+		mergeSort(arrayToSort, 0, arrayToSort.length - 1);
 
 		for (int i = 0;i < arrayToSort.length; i++) {
 			System.out.print(arrayToSort[i] + " ");
@@ -40,6 +40,35 @@ public class Sorting
 			input[minIndex] = Integer.MAX_VALUE;
 		}
 		return returnArray;
+	}
+
+	public static void mergeSort(int[] input, int low, int high)
+	{
+		if (low < high) {
+			int middle = (low + high) / 2;
+			mergeSort(input, low, middle);
+			mergeSort(input, middle + 1, high);
+			merge(input, low, middle, high);
+		}
+	}
+
+	public static void merge(int[] input, int low, int middle, int high)
+	{
+		int left = low;
+		int right = middle + 1;
+		while (left <= middle && right <= high) {
+			if (input[left] > input[right]) {
+				int temp = input[right];
+				for (int i = right - 1; i >= left; i--) {
+					input[i + 1] = input[i];
+				}
+				input[left] = temp;
+
+				right++;
+				middle++;
+			}
+			left++;
+		}
 	}
 
 	public static void quickSort(int[] input)
