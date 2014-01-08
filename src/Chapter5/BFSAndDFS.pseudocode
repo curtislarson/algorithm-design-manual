@@ -1,0 +1,47 @@
+// Note: This is just pseudocode
+
+
+BFS (Graph g, int start) {
+
+	bool discovered[g.nvertices];
+	bool processed[g.nvertices];
+
+	queue q;
+	init_queue(q);
+	Node n;
+	enqueue(start);
+	discovered[start] = true;
+	while(!queue.isEmpty()) {
+		int value = queue.deque();
+		processed[value] = true;
+		n = g.edges(value);
+		while (n != null) {
+			int y = n.y;
+			if (processed[y] == false) {
+				process_edge(value, y);
+			}
+			if (discovered[y] == false) {
+				q.enqueu(value);
+				discovered[y] = true;
+			}
+			n = n.next();
+		}
+	}
+}
+
+bool discovered[nvertices];
+bool processed[nvertices];
+int parent[nvertices];
+
+DFS (Graph g, int start) {
+
+	discovered[start] = true;
+	for (vertice v in Adj(start)) {
+		process(v, start)
+		if (!discovered[v]) {
+			parent[v] = start;
+			DFS(g, v);
+		}
+	}
+	processed[start] = true;
+}
