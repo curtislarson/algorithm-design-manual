@@ -1,0 +1,39 @@
+// Pseudocode for problem 5-32
+// Also answer to 5-31 is a queue for BFS and stack for DFS
+
+
+// So a binary search tree is like
+      D
+     / \
+    C   F
+   / \    \
+  A   E    G
+
+// Sorted order would mean needing to perform an inorder traversal
+// of the tree. Not sure what they mean about i'th node. I guess
+// just the i'th one we reach
+
+Node traverse(Node curr, int currIdx, int idx) {
+	Node temp = null;
+	if (curr != null) {
+		temp = traverse(curr.left, currIdx);
+		if (temp != null) {
+			return temp;
+		}
+		currIdx++;
+		if (currIdx == idx) {
+			return curr;
+		}
+		temp = traverse(curr.right, currIdx);
+		if (temp != null) {
+			return temp
+		}
+	}
+	return null;
+}
+
+// If we are unable to modify currIdx like this, which is possible, it
+// would also be easy to make a struct that you can return that would
+// hold the Node and the currentIdx.
+
+
