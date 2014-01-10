@@ -1,0 +1,39 @@
+// Prims selects an arbitrary vertex and adds that vertex
+// to the spanning tree, it then greedily chooses the lowest cost 
+// next vertex and adds that to the tree, etc.
+
+function Prim(Graph g, int start) {
+
+	bool intree[MAXV + 1]; // Init to all false
+	int distance[MAXV + 1]; // Init to maxint
+	int parent[MAXV + 1]; // init to -1
+	int currentV = start; // current vertex
+	int nextV; // next vertex
+	edgenode edge; // temp variable for edges of current vertex
+	int weight; // temp variable for weight;
+
+	while(intree[currentV] == false) {
+		intree[currentV] = true;
+		edge = g.edges[currentV];
+
+		while (edge != null) {
+			nextV = edge.y;
+			weight = edge.weight;
+			if (distance[nextV] > weight && intree[nextV] == false) {
+				distance[nextV] = weight;
+				parent[nextV] = currentV;
+			}
+			edge = edge.next;
+		}
+
+		currentV = 1;
+		int dist = MAXINT;
+		for (i = 1; i < nvertices; i++) {
+			if (intree[i] == false && dist > distance[i]) {
+				dist = distance[i];
+				currentV = i;
+			}
+		}
+	}
+
+}
