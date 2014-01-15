@@ -1,0 +1,41 @@
+// Pseudocode to attempt to solve 7-16
+
+// Assume we have a text file that has dictionary words in it.
+
+// We could construct a data structure to make it easy to rule out permutations
+// that would end up not leading to a word.
+
+class Node {
+	char dataChar;
+	String prefix;
+	Node[] children = new Node[26]; // init to null
+}
+
+int OFFSET = // Whatever offset you can do to index from 0-25 with
+			 // char to int conversion
+
+
+// This inital construction takes O(nm) time.
+Node root
+root.dataChar = '';
+root.prefix = "";
+while (reading from the text file) {
+	String word = readLine();
+	Node current = root;
+	for (char c in word) {
+		int index = (int)c - OFFSET;
+		if (current.children[index] != null) {
+			current = current.children[index];
+		}
+		else {
+			Node temp;
+			temp.dataChar = c;
+			temp.prefix = current.prefix + dataChar;
+			current.children[index] = temp;
+			current = temp;
+		}
+	}
+}
+
+// Now we use the standard algorithm to generate permutations, and if we ever
+// reach a null index, we can stop searching, which will hopefully save time.
