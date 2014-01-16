@@ -1,0 +1,80 @@
+// Pseudocode to attempt to solve 7-17
+
+// Using the same data structure as 7-16
+
+class Node {
+	char dataChar;
+	String prefix;
+	Node[] children = new Node[26]; // init to null
+	int level;
+	boolean fullWord = false;
+}
+
+int OFFSET = // Whatever offset you can do to index from 0-25 with
+			 // char to int conversion
+
+
+// This inital construction takes O(nm) time.
+Node root
+root.dataChar = '';
+root.prefix = "";
+while (reading from the text file) {
+	String word = readLine();
+	Node current = root;
+	for (char c in word) {
+		int index = (int)c - OFFSET;
+		if (current.children[index] != null) {
+			current = current.children[index];
+		}
+		else {
+			Node temp;
+			temp.dataChar = c;
+			temp.prefix = current.prefix + dataChar;
+			temp.index = current.index + 1;
+			current.children[index] = temp;
+			current = temp;
+		}
+	}
+	current.fullWord = true;
+}
+
+
+// Each number will map to three letters (4 with the last digit)
+map = {
+    '2': 'abc',
+    '3': 'def',
+    '4': 'ghi',
+    '5': 'jkl',
+    '6': 'mno',
+    '7': 'pqrs',
+    '8': 'tuv',
+    '9': 'wxyz',
+}
+
+ArrayList<String> words = new ArrayList<String>();
+Queue<Node> nodes = new Queue<Node>();
+// Add the first 3-4 digits to the nodes stack to start off.
+foreach (char c in input.substring(1,input.length) && nodes.length() > 0) {
+	digits = map[c];
+	foreach(char d in digits && nodes.length() > 0) {
+		int index = nodes.peek().index;
+		Node currNode = nodes.deque();
+		while(index == currNode.index) {
+			if (currNode.children[d - OFFSET] != null) {
+				nodes.queue(currNode.children[d - OFFSET]);
+				if (currNode.fullWord) {
+					words.add(currNode.prefix + currNode.dataChar);
+				}
+			}
+			else {
+				if (currNode.fullWord) {
+					words.add(currNode.prefix);
+				}
+			}
+			currNode = nodes.deque();
+		}
+		nodes.queue(currNode);
+	}
+}
+
+// Now print everything in nodes.
